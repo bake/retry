@@ -7,14 +7,12 @@
 
 This package will only retry a request if it did not return an error and the status code is outside of [200-300[.
 
+[embedmd]:# (retry_test.go /func ExampleNew/ $)
 ```go
-func main() {
-	// Create a new http.Client that will retry requests five times and sleeps
-	// one second between each one.
+func ExampleNew() {
 	client := &http.Client{
 		Transport: retry.New(5, time.Second, nil),
 	}
-
 	res, err := client.Get("https://httpbin.org/status/500")
 	if err != nil {
 		log.Fatal(err)
