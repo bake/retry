@@ -1,3 +1,9 @@
+// Package retry is a small implementation of the http.RoundTripper interface,
+// that can be found in http.Client. It is responsible to make HTTP requests
+// and can be used to cache or retry them.
+//
+// This package will only retry a request if it did not return an error and the
+// status code is outside of [200-300[.
 package retry
 
 import (
@@ -6,9 +12,8 @@ import (
 )
 
 // New returns a new transport that can retry a request multiple times between
-// which it sleeps a given duration.
-// The transport argument can be used to chain transports. If it is nil,
-// http.DefaultTransport is used.
+// which it sleeps a given duration. The transport argument can be used to
+// chain transports. If it is nil, http.DefaultTransport is used.
 func New(retries int, backoff time.Duration, transport http.RoundTripper) http.RoundTripper {
 	if transport == nil {
 		transport = http.DefaultTransport
