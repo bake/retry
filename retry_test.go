@@ -11,13 +11,11 @@ import (
 	"github.com/bakerolls/retry"
 )
 
-// Create a new http.Client that will retry requests five times and sleeps
+// Create a new HTTP client that will retry requests five times and sleeps
 // one second between each one. Since the requested URL will always return a
 // status code of 500 (Internal Server Error), this function will run for five
 // seconds and the time it takes to call the endpoint five times.
 func ExampleNew() {
-	// Create a *http.Client that will retry requests five times and sleeps one
-	// second between each retried request.
 	client := &http.Client{
 		Transport: retry.New(5, time.Second),
 	}
@@ -32,19 +30,17 @@ func ExampleNew() {
 	}
 }
 
-// WithVerifier can be used to modify the default verifier that is used to
-// determine if a request can be tried again.
+// WithVerifier can be used to modify the default behaviour that is used to
+// determine if a request can be repeated. In this example, all responses that
+// do not succeed (with a status code outside [200-300[) will be tried again.
 func ExampleWithVerifier() {
-	// Only retry if the responses status code is below 500. This is similar to
-	// the default behaviour, but ignores 429 (Too Many Requests).
-	// With the default verifier this function would take about five seconds.
 	verifier := func(res *http.Response) bool {
-		return res.StatusCode < 500
+		return 200 > res.StatusCode || res.StatusCode >= 300
 	}
 	client := &http.Client{
 		Transport: retry.New(5, time.Second, retry.WithVerifier(verifier)),
 	}
-	res, err := client.Get("https://httpbin.org/status/429")
+	res, err := client.Get("https://httpbin.org/status/418")
 	if err != nil {
 		log.Fatal(err)
 	}
