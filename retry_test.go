@@ -8,7 +8,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/bakerolls/retry"
+	"github.com/bake/retry"
 )
 
 // Create a new HTTP client that will retry requests five times and sleeps

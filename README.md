@@ -1,7 +1,7 @@
 # retry
 
-[![GoDoc](https://godoc.org/github.com/bakerolls/retry?status.svg)](http://godoc.org/github.com/bakerolls/retry)
-[![Go Report Card](https://goreportcard.com/badge/github.com/bakerolls/retry)](https://goreportcard.com/report/github.com/bakerolls/retry)
+[![GoDoc](https://godoc.org/github.com/bake/retry?status.svg)](http://godoc.org/github.com/bake/retry)
+[![Go Report Card](https://goreportcard.com/badge/github.com/bake/retry)](https://goreportcard.com/report/github.com/bake/retry)
 
 Package retry is a small implementation of the `http.RoundTripper` interface
 that can be found in `http.Client`. It is responsible to make HTTP requests
@@ -25,7 +25,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/bakerolls/retry"
+	"github.com/bake/retry"
 	"io"
 	"log"
 	"net/http"
@@ -61,7 +61,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/bakerolls/retry"
+	"github.com/bake/retry"
 	"io"
 	"log"
 	"net/http"
